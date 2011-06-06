@@ -68,7 +68,7 @@ describe User do
       user_with_duplicate_email.should_not be_valid
     end
     
-    describe "password validations" do
+describe "password validations" do
       
       it "should require a password" do
         User.new(@attr.merge(:password => " ", :password_confirmation => " ")).
@@ -105,7 +105,6 @@ describe User do
       it "should set the encryption password" do
         @user.encrypted_password.should_not be_blank
       end
-    end
         
     describe "has_password? method" do
       
