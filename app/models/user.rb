@@ -1,16 +1,19 @@
 # == Schema Information
-# Schema version: 20110531192417
+# Schema version: 20110604043611
 #
 # Table name: users
 #
-#  id         :integer         not null, primary key
-#  name       :string(255)
-#  email      :string(255)
-#  created_at :datetime
-#  updated_at :datetime
+#  id                 :integer         not null, primary key
+#  name               :string(255)
+#  email              :string(255)
+#  created_at         :datetime
+#  updated_at         :datetime
+#  encrypted_password :string(255)
+#  salt               :string(255)
 #
 
 class User < ActiveRecord::Base
+  attr_accessor :password
   attr_accessible :name, :email, :password, :password_confirmation
   
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
@@ -54,7 +57,7 @@ class User < ActiveRecord::Base
   end
   
   def make_salt 
-    secure_has("#{Time.now.utc}--#{password}")
+    secure_hash("#{Time.now.utc}--#{password}")
   end
   
   def secure_hash(string)
