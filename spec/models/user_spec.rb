@@ -137,7 +137,7 @@ describe "password validations" do
       end
       
       it "should return the the user on email/password match" do
-        matching_user = User.authenticate(@atrr[:email], @attr[:password])
+        matching_user = User.authenticate(@attr[:email], @attr[:password])
         matching_user.should == @user 
       end
     end
