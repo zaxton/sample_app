@@ -24,7 +24,7 @@ class User < ActiveRecord::Base
                     :format => { :with => email_regex },
                     :uniqueness => { :case_sensitive => false }
   
-  #Automatically creates a password_confirmation
+  # Automatically creates a password_confirmation
   
   validates :password, :presence => true,
                        :confirmation => true,
@@ -43,6 +43,12 @@ class User < ActiveRecord::Base
     user = find_by_email(email)
     user && user.has_password?(submitted_password) ? user : nil
   end
+  
+  def self.authenticate_with_salt(id, cookie_salt)
+    user = find_by_id(id)
+    (user && user.salt == cookie_salt) ? user : nil
+  end
+    
   
   private
   
