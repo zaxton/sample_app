@@ -2,7 +2,7 @@ module SessionsHelper
   
   # Sign in User based on user id. Note => user comes from app/model/users 
   def sign_in(user)
-    session[:current_user_id] = user.id
+    session[:remember_token] = user.id
     self.current_user = user
   end
   
@@ -12,7 +12,7 @@ module SessionsHelper
   end
   
   def current_user
-    @current_user ||= session[:current_user_id] && User.find(session[:current_user_id])
+    @current_user ||= session[:remember_token] && User.find(session[:remember_token])
   end
   
   # Sign in if current user is not blank 
@@ -22,7 +22,7 @@ module SessionsHelper
   
   # Sign user out when id and current_user status go blank  
   def sign_out
-    session[:current_user_id] = nil
+    session[:remember_token] = nil
     @current_user = nil
   end
 end
