@@ -1,34 +1,28 @@
 module SessionsHelper
   
+  # Sign in User based on user id. Note => user comes from app/model/users 
   def sign_in(user)
-    cookies.permanent.signed[:remember_token] = [user.id, user.salt]
+    session[:current_user_id] = user.id
     self.current_user = user
   end
   
+  # Current_user derived from user 
   def current_user=(user)
     @current_user = user
   end
   
   def current_user
-    @current_user ||= user_from_remember_token
+    @current_user ||= session[:current_user_id] && User.find(session[:current_user_id])
   end
   
+  # Sign in if current user is not blank 
   def signed_in?
     !current_user.nil?
   end
   
+  # Sign user out when id and current_user status go blank  
   def sign_out
-    cookies.delete(:remember_token)
-    self.current_user = nil
-  end
-  
-  private 
-  
-  def user_from_remember_token
-    User.authenticate_with_salt(*remember_token)
-  end
-  
-  def remember_token
-    cookies.signed[:remember_token] || [nil, nil]
+    session[:current_user_id] = nil
+    @current_user = nil
   end
 end
