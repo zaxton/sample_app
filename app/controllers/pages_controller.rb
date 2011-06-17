@@ -1,4 +1,7 @@
 class PagesController < ApplicationController
+  
+  # Define title variables for HTML pages
+  
   def home
     @title = "Home"
   end
