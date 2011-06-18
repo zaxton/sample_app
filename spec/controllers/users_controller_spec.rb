@@ -54,7 +54,7 @@ end
     
     it "should have the right email field" do
       get :new
-      response.should have_selector("input[name='user[email]'][type='text']")
+      response.should have_selector("input[name='user[email]'][type='email']")
     end
     
     it "should have the right password field" do
