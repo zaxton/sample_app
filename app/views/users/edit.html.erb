@@ -1,4 +1,4 @@
-<h1>Sign Up!</h1>
+<h1>Edit Account Info</h1>
 
 <%= simple_form_for(@user) do |f| %>
 <%= render 'shared/error_messages', :object => f.object %>
@@ -16,7 +16,11 @@
 	<%= f.input :password_confirmation, :required => true, :label => "Confirmation" %>
 </div>
 <div class= "actions">
-	<%= f.button :submit, "Sign Up!" %>
+	<%= f.button :submit, "Update" %>
 </div>
 <% end %>
 
+<div>
+<%= gravatar_for @user %>
+<a href="http://gravatar.com/emails">changes</a>
+</div>
