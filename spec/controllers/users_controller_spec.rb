@@ -153,7 +153,7 @@ end
   
   describe "PUT 'update" do 
     
-    bfore(:each) do
+    before(:each) do
       @user = Factory(:user)
       test_sign_in(@user)
     end
@@ -192,9 +192,14 @@ end
         @user.email.should == @attr[:email]
       end
       
+      it "should redirect to the user show page" do
+        put :update, :id => @user, :user => @attr
+        response.should redirect_to(user_path(@user))
+      end
+      
       it "should have a flash message" do
         put :update, :id => @user, :user => @attr
-        flash[:success].should =~ /updated/
+        flash[:success].should =~ /Profile Updated!/
       end
     end
   end
