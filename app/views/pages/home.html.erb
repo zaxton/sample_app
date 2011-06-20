@@ -5,4 +5,24 @@
 		      sample application.
 </p>
 
-<%= link_to "Sign Up Now!", signup_path , :class => "signup_button round" %> 
+<h1>Sign Up!</h1>
+
+<%= simple_form_for(@user) do |f| %>
+<%= render 'shared/error_messages', :object => f.object %>
+
+<div class= "field">
+	<%= f.input :name %>
+</div>
+<div class= "field">
+	<%= f.input :email %>
+</div>
+<div class= "field">
+    <%= f.input :password %>
+</div>
+<div class= "field">
+	<%= f.input :password_confirmation, :required => true, :label => "Confirmation" %>
+</div>
+<div class= "actions">
+	<%= f.button :submit, "Sign Up!" %>
+</div>
+<% end %>

@@ -3,9 +3,10 @@ class PagesController < ApplicationController
   # Define title variables for HTML pages
   
   def home
+    @user = User.new
     @title = "Home"
   end
-
+  
   def contact
     @title = "Contact"
   end
