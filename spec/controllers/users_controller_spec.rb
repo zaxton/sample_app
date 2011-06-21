@@ -226,7 +226,7 @@ end
     describe "for signed in users" do
       
       before(:each) do
-        wrong_user = Factory(:user => :email => "user@example.com")
+        wrong_user = Factory(:user, :email => "user@example.com")
         test_sign_in(wrong_user)
       end
       
@@ -237,6 +237,46 @@ end
       it "should require matching users for update" do
         put :update, :id => @user, :user => {}
         response.should redirect_to(root_path)
+      end
+    end
+  end
+  
+  describe "GET 'index'" do 
+    
+    describe "for non-signedin users" do
+      
+      it "should deny access" do
+        get :index
+        response.should redirect_to(signin_path)
+        flash[:notice].should =~ /not signed in/i
+      end
+    end
+    
+    describe "for signed in users" do
+      
+      before(:each) do
+        @user = test_sign_in(Factory(:user))
+        second = Factory(:user, :name => "Bob", :email => "anotherone@example.com")
+        third = Factory(:user, :name => "Bill", :email => "billsemail@example.com")
+        
+        @user = [@user, second, third]
+      end
+      
+      it "should be successful" do
+        get :index
+        response.should be_success
+      end
+      
+      it "should have the right title" do
+        get :index
+        response.should have_selector("title", :content => "All Users")
+      end
+      
+      it "should have an element for each user" do
+        get :index
+        @user.each do |user|
+          response.should have_selector("li", :content => user.name)
+        end
       end
     end
   end
