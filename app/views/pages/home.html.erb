@@ -4,25 +4,23 @@
 		      <a href="http://railstutorial.org/">Ruby on Rails Tutorial</a>
 		      sample application.
 </p>
+<div class="Major_field">
 
 <h1>Sign Up!</h1>
 
 <%= simple_form_for(@user) do |f| %>
 <%= render 'shared/error_messages', :object => f.object %>
 
-<div class= "field">
+
 	<%= f.input :name, :placeholder => "Name", :label => false %>
-</div>
-<div class= "field">
+
 	<%= f.input :email, :placeholder => "Email", :label => false %>
-</div>
-<div class= "field">
+
     <%= f.input :password, :placeholder => "Password", :label => false %>
-</div>
-<div class= "field">
+
 	<%= f.input :password_confirmation, :required => true, :placeholder => "Confirmation", :label => false %>
-</div>
-<div class= "actions">
+
 	<%= f.button :submit, "Sign Up!" %>
-</div>
+
 <% end %>
+</div>

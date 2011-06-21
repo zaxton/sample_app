@@ -1,5 +1,6 @@
 .container {
   width: 710px;
+  height:800px;
 }
 
 body {
@@ -110,7 +111,7 @@ footer {
 }
 
 footer nav {
-  float: none;
+  float: inherit;
 }
 
 /* User show page */
@@ -222,4 +223,16 @@ div.field, div.actions {
 #error_explanation ul li {
   font-size: 12px;
   list-style: square;
+}
+
+.Major_field {
+	float:right;
+}
+
+ul.users {
+	margin-top: 1em;
+}
+
+.users li {
+	list-style: none;
 }
