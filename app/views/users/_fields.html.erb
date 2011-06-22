@@ -1,0 +1,13 @@
+<%= render 'shared/error_messages', :object => f.object %>
+<div class= "field">
+	<%= f.input :name %>
+</div>
+<div class= "field">
+	<%= f.input :email %>
+</div>
+<div class= "field">
+    <%= f.input :password %>
+</div>
+<div class= "field">
+	<%= f.input :password_confirmation, :required => true, :label => "Confirmation" %>
+</div>

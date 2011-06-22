@@ -244,7 +244,7 @@ end
   
   describe "GET 'index'" do 
     
-    describe "for non-signedin users" do
+    describe "for non-signed in users" do
       
       it "should deny access" do
         get :index
@@ -291,6 +291,33 @@ end
         response.should have_selector("a", :href => "/users?page=2", :content => "Next")
       end  
     end
+    
+    describe "for admin users" do
+    
+    	before(:each) do
+        admin = Factory(:user, :email => "admin@example.com", :admin => true)
+        test_sign_in(admin)
+      end
+      
+      it "should have delete user tab" do
+      	get :index
+      	response.should have_selector("a", :title => "Delete Zach Easley", 
+      								  :content => "delete")
+      end
+    end 
+    
+    describe "for non admin users" do
+    	
+       before(:each) do
+    	@user = Factory(:user)
+       end
+    	
+       it "should not have delete user tab" do
+    	get :index
+    	response.should_not have_selector("a", :title => "Delete Zach Easley", 
+      								  :content => "delete")
+      end
+    end	
   end
   
   describe "DELETE 'destroy'" do 
@@ -319,8 +346,8 @@ end
     describe "as a admin user" do
       
       before(:each) do
-        admin = Factory(:user, :email => "admin@example.net", :admin => true)
-        test_sign_in(admin)
+        @admin = Factory(:user, :email => "admin@example.com", :admin => true)
+        test_sign_in(@admin)
       end
       
       it "should destroy the user" do
@@ -332,6 +359,12 @@ end
       it "should redirect to the users page" do
         delete :destroy, :id => @user
         response.should redirect_to(users_path)
+      end
+      
+      it "should not be able to destroy itself" do
+       lambda do
+      	delete :destroy, :id => @admin 
+       end.should_not change(User, :count)
       end
     end
   end

@@ -1,20 +1,7 @@
 <h1>Edit Account Info</h1>
 
 <%= simple_form_for(@user) do |f| %>
-<%= render 'shared/error_messages', :object => f.object %>
-
-<div class= "field">
-	<%= f.input :name %>
-</div>
-<div class= "field">
-	<%= f.input :email %>
-</div>
-<div class= "field">
-    <%= f.input :password %>
-</div>
-<div class= "field">
-	<%= f.input :password_confirmation, :required => true, :label => "Confirmation" %>
-</div>
+<%= render 'fields', :f => f %>
 <div class= "actions">
 	<%= f.button :submit, "Update" %>
 </div>
@@ -22,5 +9,6 @@
 
 <div>
 <%= gravatar_for @user %>
-<a href="http://gravatar.com/emails">changes</a>
+<%= link_to "change", "http://gravatar.com/emails", :target => "_blank" %>
+<p>Click photo to change pic</p>
 </div>
