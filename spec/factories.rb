@@ -10,3 +10,9 @@ end
 Factory.sequence :email do |n|
   "person-#{n}@example.com"
 end
+
+# "Fills in" a micropost and states that micropost belongs to user
+Factory.define :micropost do |micropost|
+micropost.content "foo bar"
+micropost.association :user
+end

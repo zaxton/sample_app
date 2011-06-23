@@ -79,21 +79,6 @@ nav ul li a:hover {
   text-decoration: underline;
 }
 
-/* Sign up button */
-
-a.signup_button {
-  margin-left: auto;
-  margin-right: auto;
-  display: block;
-  text-align: center;
-  width: 190px;
-  color: #fff;
-  background: #006400;
-  font-size: 150%;
-  font-weight: bold;
-  padding: 20px;
-}
-
 /* Round corners */
 
 .round {
@@ -226,7 +211,8 @@ div.field, div.actions {
 }
 
 .Major_field {
-	float:right;
+   position:relative;
+   right:-350px;
 }
 
 ul.users {
@@ -235,4 +221,10 @@ ul.users {
 
 .users li {
 	list-style: none;
+}
+
+#free{
+	position:relative;
+	right:-10em;
+	top:-35px;
 }
