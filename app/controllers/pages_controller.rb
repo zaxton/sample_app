@@ -3,6 +3,7 @@ class PagesController < ApplicationController
   # Define title variables for HTML pages
   
   def home
+    @micropost = Micropost.new if signed_in?
     @user = User.new
     @title = "Home"
   end
