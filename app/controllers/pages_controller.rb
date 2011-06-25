@@ -3,7 +3,8 @@ class PagesController < ApplicationController
   # Define title variables for HTML pages
   
   def home
-    @micropost = Micropost.new if signed_in?
+    @feed_items = current_user.feed.paginate(:page => params[:page])
+    @micropost = Micropost.new if signed_in?ß
     @user = User.new
     @title = "Home"
   end

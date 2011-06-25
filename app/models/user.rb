@@ -46,6 +46,10 @@ class User < ActiveRecord::Base
     user && user.has_password?(submitted_password) ? user : nil
   end
   
+  def feed 
+    Micropost.where("user_id = ?", id)
+  end
+  
   
   private
   
