@@ -1,0 +1,9 @@
+<%= form_for @micropost |f| %>
+	<%= render 'shared/error_messages', :object => f.object %>
+   <div class = "filed">
+   		<%= f.text_area :content %>
+   </div>
+   <div class = "actions">
+   		<%= f.submit "Submit" %>
+   </div>
+<% end %>
