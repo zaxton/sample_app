@@ -344,7 +344,7 @@ end
     
     describe "as non admin user" do
       
-      it "should protect the page" do 
+      it "should protect the page" do
         test_sign_in(@user)
         delete :destroy, :id => @user
         response.should redirect_to(root_path)
