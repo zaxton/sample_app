@@ -283,3 +283,20 @@ form.new_micropost textarea {
   height: 4em;
   margin-bottom: 0;
 }
+
+#blog_create{
+  position: relative;
+  left: 550px;
+  bottom: 150px;
+}
+
+.Blog_entries{
+  position: relative;
+  left: 30em;
+  bottom: 5em;
+  width: 30%;
+  padding: 1em;
+  vertical-align: top;
+  background: #ffc;
+}	
+

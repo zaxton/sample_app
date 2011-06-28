@@ -1,0 +1,32 @@
+<table class ="Blogs" summary = "Blog Information">
+	<tr>
+		<td class ="main">
+			<h2> 
+				<%= @blog.title %>
+			</h2>
+			
+			<% unless @blog.content.empty? %>
+			<table class="Blogs" summary="User Blogs">
+				<tr> 
+					<td class="Blogs">
+						<span class="content">
+							<%= @blog.content %>
+						</span><br \>
+						<span class="timestamp">
+							<strong>
+								Posted <%= time_ago_in_words(@blog.created_at) %> ago.
+							</strong>
+						</span>
+					</td>
+				<tr>
+			</table>
+			<% end %>
+		</td>
+		<td class = "sidebar round">
+			<strong>Name</strong> <%= @user.name %><br />
+			<strong>URL</strong> <%= link_to user_path(@user), @user %><br \>
+			<strong>Microposts</strong> <%= @user.microposts.count %><br \>
+			<strong>Blogs</strong> <%= Blog.count %>
+		</td>
+	</tr>
+</table>

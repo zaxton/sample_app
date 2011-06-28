@@ -1,0 +1,19 @@
+<h1><%= @user.name %>'s Blogs</h1>
+
+<% unless @blog.empty? %>
+	<ul>
+		<% @blog.each do |blog| %>
+		<li>
+			<%= link_to blog.title, blog %>
+			Posted <%= time_ago_in_words(blog.created_at) %> ago.
+		</li>
+	</ul>
+<% end %>
+<% end %>
+<table class = "Blog_entries">
+		<td>
+			<%= link_to "Compose", new_blog_path %><br />
+			<strong>Blogs</strong> <%= Blog.count %>
+		</td>
+	</tr>
+</table>

@@ -1,9 +1,9 @@
-<%= form_for @micropost do |f| %>
+<%= simple_form_for @micropost do |f| %>
 	<%= render 'shared/error_messages', :object => f.object %>
    <div class = "filed">
-   		<%= f.text_area :content %>
+   		<%= f.input :content, :placeholder => "What's on your mind?", :label => false, :required => false %>
    </div>
    <div class = "actions">
-   		<%= f.submit "Submit" %>
+   		<%= f.button :submit, "Submit" %>
    </div>
 <% end %>

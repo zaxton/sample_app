@@ -1,0 +1,18 @@
+<tr>
+	<td class ="main">
+		<h2> 
+			<%= blog.title %>
+		</h2>
+		<table class="Blogs" summary="User Blogs">
+			<tr> 
+				<td class="Blogs">
+					<span class="content">
+						<%= blog.content %>
+					</span><br \>
+					<span class="timestamp">
+						<strong>
+							Posted <%= time_ago_in_words(@blog.created_at) %> ago.
+						</strong>
+					</span>
+				</td>
+			<tr>
