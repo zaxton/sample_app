@@ -4,8 +4,4 @@ module UsersHelper
                                             :class => 'gravatar',
                                             :gravatar => options)
   end
-  
-  def the_user
-          @user = User.find(params[:id])
-   end
 end
