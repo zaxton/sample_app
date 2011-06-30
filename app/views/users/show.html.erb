@@ -1,10 +1,11 @@
-<table class ="Profile" summary = "Profile Information">
+<table class ="profile" summary = "Profile information">
 	<tr>
 		<td class ="main">
 			<h1> 
 				<%= gravatar_for @user %> 
 				<%= @user.name %>
 			</h1>
+			<%= render 'follow_form' if signed_in? %>
 			
 			<% unless @user.microposts.empty? %>
 			<table class="Microposts" summary="User Microposts">
@@ -15,16 +16,14 @@
 			<table class ="Blogs" summary = "Blog Information">
 				<%= @blog.title %>
 			</table>
-						
-						<% end %>
+			<% end %>
 		</td>
-		<td class = "sidebar round">
+			<td class = "sidebar round">
 			<strong>Name</strong> <%= @user.name %><br />
 			<strong>URL</strong> <%= link_to user_path(@user), @user %><br \>
 			<strong>Microposts</strong> <%= @user.microposts.count %><br \>
-			<strong>Blogs</strong> <%= Blog.count %>
+			<strong>Blogs</strong> <%= Blog.count %><br \>
+			<%= render 'shared/stats' %>
 		</td>
 	</tr>
 </table>
-				
-

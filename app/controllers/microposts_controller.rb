@@ -4,7 +4,8 @@ before_filter :authorized_user, :only => :destroy
 
 def create
   @micropost = current_user.microposts.build(params[:micropost])
-  if @micropost.save
+  if !@micropost.content.empty? 
+    @micropost.save
     flash[:success] = "Posted"
     redirect_to root_path
   else

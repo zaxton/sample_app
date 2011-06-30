@@ -1,12 +1,12 @@
-<%= form_for(:blog, :url => '/blog') do |f| %>
+<%= form_for(:blog, :url => blog_index_path) do |f| %>
 	
-	<div class= "fields">
-		<%= f.label :title %>: <%= f.text_field :title %>
+	<div class = "fields">
+			<%= f.label :title %>: <%= f.text_field :title %>
 	</div>
 	<div class = "field">
-		<%= f.text_area :content %>
-	</div>
-	</div class= "actions_blog">
+			<%= f.text_area :content %>
+		</div>
+	<div class = "actions">
 		<%= f.submit "Post", :class => 'button'  %>
 	</div>
 <% end %>
