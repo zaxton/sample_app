@@ -4,16 +4,29 @@
 	<ul>
 		<% @blog.each do |blog| %>
 		<li>
-			<%= link_to blog.title, blog %>
-			Posted <%= time_ago_in_words(blog.created_at) %> ago.
+			<%= link_to blog.title, blog %><br \>
+			<%= truncate(blog.content)%>
+			Posted <%= time_ago_in_words(blog.created_at) %> ago. 
+			|<%= link_to "delete", blog, :method => :delete, :confirm => "Are you sure?", 
+										 :title => "Delete #{blog.title}", :class => 'button danger			 '%>
 		</li>
 	</ul>
 <% end %>
 <% end %>
 <table class = "Blog_entries">
 		<td>
-			<%= link_to "Compose", new_blog_path %><br />
-			<strong>Blogs</strong> <%= Blog.count %>
+			<div class = "user_info">
+				<a href = "<%= user_path(current_user) %>">
+					<%= gravatar_for current_user, :size => 30 %>
+					<span class = "user_name">
+						<%= current_user.name %>
+					</span>
+					<span class = "microposts">
+						<%= pluralize(current_user.blog.count, "blog" )%>
+					</span>
+				 </a><br \>
+				<%= link_to "New Blog", new_blog_path, :class => "button primary" %>
+			</div>
 		</td>
 	</tr>
 </table>

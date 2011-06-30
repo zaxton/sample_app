@@ -27,6 +27,7 @@ section h1 {
   font-size: 200%;
 }
 
+
 /* Links */
 
 a {
@@ -299,4 +300,10 @@ form.new_micropost textarea {
   vertical-align: top;
   background: #ffc;
 }	
+
+.Search{
+	position: relative;
+	left: 35em;
+	top: 10em;
+}
 

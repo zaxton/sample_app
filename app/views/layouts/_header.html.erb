@@ -5,19 +5,21 @@
 			<%= link_to logo, root_path %>
 		<% end %>
 		<nav class= "round">
-			<ul>
-				<li><%= link_to "Home", root_path %></li>
+			<ul class="button-group">
+				<li><%= link_to "Home", root_path, :class => 'button pill' %></li>
 				<% if signed_in? %>
-					<li><%= link_to "Profile", current_user %></li>
-					<li><%= link_to "Blog", blog_index_path %>
-					<li><%= link_to "Settings", edit_user_path(current_user) %>
-					<li><%= link_to "Users", users_path %>
+					<li><%= link_to "Profile", current_user, :class => 'button pill' %></li>
+					<li><%= link_to "Blog", blog_index_path, :class => 'button pill' %>
+					<li><%= link_to "Settings", edit_user_path(current_user), 
+												:class => 'button pill' %>
+					<li><%= link_to "Users", users_path, :class => 'button pill' %>
 				<% end %>
-				<li><%= link_to "Help", help_path %></li>
+				<li><%= link_to "Help", help_path, :class => 'button pill' %></li>
 				<% if signed_in? %>
-					<li><%= link_to "Sign out", signout_path, :method => :delete %></li>
+					<li><%= link_to "Sign out", signout_path, :method => :delete, 
+															  :class => 'button pill primary' %></li>
 				<% else %>
-					<li><%= link_to "Sign in", signin_path %></li>
+					<li><%= link_to "Sign in", signin_path, :class => 'button pill primary' %></li>
 				<% end %>
 			</ul>
 		</nav>

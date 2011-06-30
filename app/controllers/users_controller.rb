@@ -1,18 +1,18 @@
 class UsersController < ApplicationController
   
-  before_filter :authenticate, :only => [:index, :edit, :update]
+  before_filter :authenticate, :except => [:show, :new, :create]
   before_filter :correct_user, :only => [:edit, :update]
   before_filter :admin_user, :only => [:destroy] 
   
   def index
     @title = "All Users"
-    @users = User.paginate(:page => params[:page])
+    @users = User.search(params[:search])
   end
   
   def show
-    @user = current_user
+    @user = User.find(params[:id])
     @microposts = @user.microposts.last
-    @blog = @user.blog.last
+    @blog = @user.blog.first
     @title = @user.name
    end
   
@@ -60,6 +60,20 @@ class UsersController < ApplicationController
       @title = "Edit User Info"
       render 'edit'
     end
+  end
+  
+  def following 
+      @title = "Following"
+      @user = User.find(params[:id])
+      @users = @user.following.paginate(:page => params[:page])
+      render 'show_follow'
+  end
+  
+  def followers
+      @title = "Followers"
+      @user = User.find(params[:id])
+      @users = @user.followers.paginate(:page => params[:page])
+      render 'show_follow'
   end
   
   private

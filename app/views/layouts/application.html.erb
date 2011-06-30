@@ -3,10 +3,19 @@
   <head>
     <title><%= title %></title>
     <%= csrf_meta_tag %>
-    <%= render 'layouts/stylesheets' %>
-    <%= javascript_include_tag :defaults %>
+	<%= render 'layouts/stylesheets' %>
+    <%= javascript_include_tag :defaults, "jquery.tokeninput" %>
+	<%= stylesheet_link_tag "token-input-facebook" %>
   </head>
   <body>
+	<div class="Search">
+	<% form_tag users_path, :method => 'get' do %>
+		    <p>
+			<%= text_field_tag :search, params[:search] %>
+			<%= submit_tag "Find", :class => "button pill", :name => nil %>
+			</p>
+			<% end %>
+	</div>
 	<div class= "container">
 	 <%= render 'layouts/header' %>
 	 <section class= "round">
@@ -15,7 +24,7 @@
 		<% end %>
 		<%= yield %>
 	 </section>
-	 <%= render 'layouts/footer'%>
+     <%= render 'layouts/footer'%>
 	 <%= debug(params) if Rails.env.development? %>
 	</div>
   </body>

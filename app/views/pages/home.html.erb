@@ -8,6 +8,7 @@
 			</td>
 			<td class = "sidebar round">
 				<%= render 'shared/user_info' %>
+				<%= render 'shared/stats' %>
 			</td>
 		</tr>
 	</table>
@@ -22,7 +23,7 @@
 
 <h1>Sign Up! |</h1><p id ="free">It's free!</p>
 
-<%= simple_form_for(@user) do |f| %>
+<%= simple_form_for(@user_create) do |f| %>
 <%= render 'shared/error_messages', :object => f.object %>
 
 
@@ -34,7 +35,7 @@
 
 	<%= f.input :password_confirmation, :required => true, :placeholder => "Confirmation", :label => false %>
 
-	<%= f.button :submit, "Sign Up!" %>
+	<%= f.button :submit, "Sign Up!" , :class => "button big"%>
 
 <% end %>
 </div>

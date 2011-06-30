@@ -1,2 +1,7 @@
-// Place your application-specific JavaScript functions and classes here
-// This file is automatically included by javascript_include_tag :defaults
+/* Learn how to do this...*/
+
+function show_alert()
+{
+alert(document.form1.wordcount.value = document.form1.inputString.value.split(' ').length)
+}
+

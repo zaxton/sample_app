@@ -17,7 +17,8 @@
 			<td>
 				<%= link_to "delete", feed_item, :method => :delete,
 												 :confirm => "Are you sure?",
-												 :title => feed_item.content %>
+												 :title => feed_item.content, 
+												 :class => 'button danger' %>
 			</td>
 	<% end %>
 </tr>
