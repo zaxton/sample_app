@@ -1,21 +1,30 @@
 # == Schema Information
-# Schema version: 20110622225551
+# Schema version: 20110706013526
 #
 # Table name: users
 #
-#  id                 :integer         not null, primary key
-#  name               :string(255)
-#  email              :string(255)
-#  created_at         :datetime
-#  updated_at         :datetime
-#  encrypted_password :string(255)
-#  salt               :string(255)
-#  admin              :boolean
+#  id                  :integer         not null, primary key
+#  name                :string(255)
+#  email               :string(255)
+#  created_at          :datetime
+#  updated_at          :datetime
+#  encrypted_password  :string(255)
+#  salt                :string(255)
+#  admin               :boolean
+#  goal                :string(255)
+#  relationship_status :string(255)
+#  about_me            :string(255)
+#  quotes              :string(255)
+#  work_info           :string(255)
+#  username            :string(255)
+#  birthday            :datetime
 #
 
-class User < ActiveRecord::Base
+class User < ActiveRecord::Base 
+include AASM
   attr_accessor :password
-  attr_accessible :name, :email, :password, :password_confirmation
+  attr_accessible :username, :name, :email, :birthday, :password, :password_confirmation, :goal, 
+                  :relationship_status, :about_me, :quotes, :work_info
   has_many :microposts, :dependent => :destroy
   has_many :blog, :dependent => :destroy
   has_many :relationships, :foreign_key => "follower_id", :dependent => :destroy 
@@ -23,8 +32,13 @@ class User < ActiveRecord::Base
                                    :dependent => :destroy 
   has_many :following, :through => :relationships, :source => :followed
   has_many :followers, :through => :reverse_relationships, :source => :follower
+  has_many :messages, :dependent => :destroy
+  has_many :secretcode
   
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
+  
+  validates :username, :presence => true,
+                       :uniqueness => true
   
   validates :name, :presence => true, 
                    :length => { :maximum => 36 }
@@ -39,6 +53,19 @@ class User < ActiveRecord::Base
                        :length => { :within => 6..40 }
   
   before_save :encrypt_password
+  
+  aasm_column :state
+  aasm_initial_state :unactive
+  aasm_state :unactive
+  aasm_state :activate, :enter => :active
+  
+  aasm_event :activate do
+      transitions :to => :active, :from => [:unactive]
+  end
+  
+  def active
+      
+  end
   
   # Return true if the user's password matches the submitted password
   def has_password?(submitted_password)
@@ -56,6 +83,10 @@ class User < ActiveRecord::Base
     Micropost.from_users_followed_by(self)
   end
   
+  def mfeed
+     Message.from_users_recip_id(self)
+  end
+  
   def following?(followed)
     relationships.find_by_followed_id(followed)
   end
@@ -67,7 +98,7 @@ class User < ActiveRecord::Base
   def unfollow!(followed)
      relationships.find_by_followed_id(followed).destroy
   end
-  
+   
   def self.search(search)
     if search
       find(:all, :conditions => ['name LIKE ?', "%#{search}%"])
@@ -77,6 +108,11 @@ class User < ActiveRecord::Base
   end
   
   private
+  
+  def secure_code
+       a = ('a'..'z').to_a + ('A'..'Z').to_a + (0..9).to_a
+       a.shuffle[0..6].join
+   end
   
   def encrypt_password 
     self.salt = make_salt if new_record? 

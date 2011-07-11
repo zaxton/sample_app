@@ -1,0 +1,6 @@
+<% unless @message_items.empty? %>
+	<table class="microposts" summary = "User microposts">
+		<%= render :partial => 'messages/mfeed_item', :collection => @message_items %>
+	</table>
+	<%= will_paginate @message_items %>
+<% end %>

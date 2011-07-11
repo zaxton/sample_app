@@ -11,6 +11,7 @@ gem 'simple_form'
 gem 'will_paginate', '3.0.pre2'
 gem 'css3buttons'
 gem 'jquery-rails'
+gem 'aasm', '2.2.0'
 
 group :development do
  gem 'rspec-rails','2.6.1'

@@ -1,3 +1,9 @@
+<ul class="tabs">
+    <li><a href="#tab1">Status</a></li>
+    <li><a href="#tab2">Info</a></li>
+</ul>
+<div class="tab_container">
+<div id="tab1" class="tab_content">
 <table class ="profile" summary = "Profile information">
 	<tr>
 		<td class ="main">
@@ -5,6 +11,7 @@
 				<%= gravatar_for @user %> 
 				<%= @user.name %>
 			</h1>
+			<p>Goal:<%= @user.goal %></p>
 			<%= render 'follow_form' if signed_in? %>
 			
 			<% unless @user.microposts.empty? %>
@@ -19,11 +26,34 @@
 			<% end %>
 		</td>
 			<td class = "sidebar round">
-			<strong>Name</strong> <%= @user.name %><br />
-			<strong>URL</strong> <%= link_to user_path(@user), @user %><br \>
+			<strong>Name</strong> <%= link_to "#{@user.name}", user_path(@user) %><br \>
 			<strong>Microposts</strong> <%= @user.microposts.count %><br \>
 			<strong>Blogs</strong> <%= Blog.count %><br \>
 			<%= render 'shared/stats' %>
 		</td>
 	</tr>
 </table>
+</div>
+<div id="tab2" class="tab_content">
+	<table class ="profile" summary = "Profile information">
+		<tr>
+			<td class ="main">
+			<h6>
+				Goal: <%= @user.goal %><br \>
+				Relationship Status: <%= @user.relationship_status %><br \>
+				About Me: <%= @user.about_me %><br \>
+				Quotes: <%= @user.quotes %><br \>
+				My Work: <%= @user.work_info %><br \>
+			</h6>
+
+			</td>
+						<td class = "sidebar round">
+						<strong>Name</strong> <%= link_to "#{@user.name}", user_path(@user) %><br />
+						<strong>Microposts</strong> <%= @user.microposts.count %><br \>
+						<strong>Blogs</strong> <%= Blog.count %><br \>
+						<%= render 'shared/stats' %>
+					</td>
+				</tr>
+			</table>
+			</div>
+			</div>

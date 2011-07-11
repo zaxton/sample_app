@@ -16,7 +16,7 @@
 <h1>Ruby Sample App Home</h1>
 <p>
 		This is the home page for the
-		      <a href="http://railstutorial.org/">Ruby on Rails Tutorial</a>
+		      <a target="_blank" href="http://railstutorial.org/">Ruby on Rails Tutorial</a>
 		      sample application.
 </p>
 <div class="Major_field">
@@ -26,10 +26,15 @@
 <%= simple_form_for(@user_create) do |f| %>
 <%= render 'shared/error_messages', :object => f.object %>
 
+    <%= f.input :username, :placeholder => "Username", :label => false %>
 
 	<%= f.input :name, :placeholder => "Name", :label => false %>
 
 	<%= f.input :email, :placeholder => "Email", :label => false %>
+	
+	<%= f.input :birthday, :label => false, :as => :date, :start_year => Date.today.year,
+	                              :end_year => Date.today.year - 50, 
+	                              :order => [:month, :day, :year] %>
 
     <%= f.input :password, :placeholder => "Password", :label => false %>
 

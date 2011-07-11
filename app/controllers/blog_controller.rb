@@ -10,7 +10,7 @@ def create
         @blog = current_user.blog.build(params[:blog])
         if @blog.save
                 flash[:success] = "Posted"
-                redirect_to user_path
+                redirect_to blog_index_path
         else
                 @title = "Create Blog"
                 @blog.title = nil
@@ -23,8 +23,8 @@ end
 def show
        @title = "Blogs"
        @user= current_user
-       @blog = Blog.find(params[:id])
-       @count = Blog.count
+       @blog = current_user.blog.find(params[:id])
+       @count = current_user.blog.count
 end
 
 def index
@@ -33,6 +33,9 @@ def index
 end
 
 def destroy
+    @blog = current_user.blog.find(params[:id])
+    @blog.destroy
+    redirect_to blog_index_path
 end
 
 def closed_line 

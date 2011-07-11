@@ -1,10 +1,10 @@
 class UserMailer < ActionMailer::Base
-  default :from => "notifications@example.com"
+  default :from => "johnsonben.johnson283@gmail.com"
   
   def welcome_email(user)
     @user = user
-    @url = "http://example.com/login"
-    mail(:to => User.email,
+    
+    mail(:to => user.email,
           :subject => "Welcome to the sample app!")
   end
 end

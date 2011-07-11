@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110628075919) do
+ActiveRecord::Schema.define(:version => 20110711061314) do
 
   create_table "blogs", :force => true do |t|
     t.string   "content"
@@ -25,7 +25,8 @@ ActiveRecord::Schema.define(:version => 20110628075919) do
 
   create_table "messages", :force => true do |t|
     t.string   "content"
-    t.integer  "message_id"
+    t.integer  "user_id"
+    t.integer  "recip_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -45,17 +46,22 @@ ActiveRecord::Schema.define(:version => 20110628075919) do
     t.integer  "followed_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "friendship"
   end
 
-  add_index "relationships", ["followed_id"], :name => "index_relationships_on_followed_id"
-  add_index "relationships", ["follower_id", "followed_id"], :name => "index_relationships_on_follower_id_and_followed_id", :unique => true
-  add_index "relationships", ["follower_id"], :name => "index_relationships_on_follower_id"
+  create_table "secretecodes", :force => true do |t|
+    t.integer  "user_id",    :null => false
+    t.string   "text"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :null => false
     t.text     "data"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "user_id"
   end
 
   add_index "sessions", ["session_id"], :name => "index_sessions_on_session_id"
@@ -68,7 +74,14 @@ ActiveRecord::Schema.define(:version => 20110628075919) do
     t.datetime "updated_at"
     t.string   "encrypted_password"
     t.string   "salt"
-    t.boolean  "admin",              :default => false
+    t.boolean  "admin",               :default => false
+    t.string   "goal"
+    t.string   "relationship_status"
+    t.string   "about_me"
+    t.string   "quotes"
+    t.string   "work_info"
+    t.string   "username"
+    t.datetime "birthday"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

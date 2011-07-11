@@ -22,5 +22,9 @@ class PagesController < ApplicationController
   def help
     @title = "Help"
   end
-
+  
+  def user_email
+    @title = "Confirm Email"
+    @code = User.secrectcodes.find(params[:id])
+  end
 end

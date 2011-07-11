@@ -1,0 +1,26 @@
+	<table class= "front" summary= "For signed in users">
+		<tr>
+			<td class="main">
+				<h1 class="Micropost">Message:</h1>
+				<%= form_for @micropost do |f| %>
+				   <div class = "field">
+					    <%= f.text_field :message_tokens %>
+					</div>
+				   <div class = "field">
+					    <%= f.hidden_field :recip_id %>
+					</div>
+				   <div class = "field">
+						<%= f.text_area :content %>
+				   </div>
+				   <div class = "actions">
+				   		<%= f.submit "Post", :class => 'button' %>
+				   </div>
+				<% end %>
+				<%= render 'messages/message_feed' %>
+			</td>
+			<td class = "sidebar round">
+				<%= render 'shared/user_info' %>
+				<%= render 'shared/stats' %>
+			</td>
+		</tr>
+	</table>

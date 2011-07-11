@@ -11,12 +11,15 @@ SampleApp::Application.routes.draw do
   resources :microposts, :only => [:create, :destroy]
   resource :relationships, :only => [:create, :destroy]
   resources :blog
+  resources :messages
   
   match '/contact', :to => 'pages#contact'
   
   match '/about', :to => 'pages#about'
   
   match '/help', :to => 'pages#help'
+  
+  match '/user_email', :to => 'pages#user_email'
   
   match '/signup', :to => 'users#new'
   

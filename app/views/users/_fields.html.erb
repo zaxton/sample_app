@@ -1,13 +1,31 @@
 <%= render 'shared/error_messages', :object => f.object %>
 <div class= "field">
-	<%= f.input :name %>
+	<%= f.input :username, :required => false, :label => false %>
 </div>
 <div class= "field">
-	<%= f.input :email %>
+	<%= f.input :name, :required => false, :label => false %>
 </div>
 <div class= "field">
-    <%= f.input :password %>
+	<%= f.input :email, :required => false, :label => false %>
 </div>
 <div class= "field">
-	<%= f.input :password_confirmation, :required => true, :label => "Confirmation" %>
+    <%= f.input :password, :required => false, :label => false, :placeholder => "Edit Password" %>
+</div>
+<div class= "field">
+	<%= f.input :password_confirmation, :required => false, :label => false,  :placeholder => "Confirmation" %>
+</div>
+<div class="field">
+	<%= f.input :goal, :required => false %>
+</div>
+<div class="field">
+	<%= f.input :relationship_status, :required => false %>
+</div>
+<div class="field">
+	<%= f.input :about_me, :required => false %>
+</div>
+<div class="field">
+	<%= f.input :quotes, :required => false %>
+</div>
+<div class="field">
+	<%= f.input :work_info, :required => false %>
 </div>

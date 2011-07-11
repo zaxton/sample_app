@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   
-  before_filter :authenticate, :except => [:show, :new, :create]
+  before_filter :authenticate, :except => [:show, :new, :create, :index, :user_email]
   before_filter :correct_user, :only => [:edit, :update]
   before_filter :admin_user, :only => [:destroy] 
   
@@ -26,9 +26,10 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     if @user.save 
       # Handle a successful save
-      sign_in @user
-      flash[:success] = "Welcome to the Sample App!"
-      redirect_to @user
+      @user.secretcodes.build(:text => secure_code)
+      UserMailer.welcome_email(@user).deliver
+      flash[:success] = "A verification email has been sent. Please check email provided to continue"
+      redirect_to 'home'
     else
       @title = "Sign Up"
       @user.password = nil
@@ -65,16 +66,22 @@ class UsersController < ApplicationController
   def following 
       @title = "Following"
       @user = User.find(params[:id])
-      @users = @user.following.paginate(:page => params[:page])
+      @users = @user.following.all
       render 'show_follow'
   end
   
   def followers
       @title = "Followers"
       @user = User.find(params[:id])
-      @users = @user.followers.paginate(:page => params[:page])
+      @users = @user.followers.all
       render 'show_follow'
   end
+  
+  def user_email
+       @title = "Confirm Email"
+       @code = User.secrectcodes.find(params[:id])
+  end
+  
   
   private
   
@@ -87,4 +94,5 @@ class UsersController < ApplicationController
     @user= User.find(params[:id])          
     redirect_to(root_path) if !current_user.admin? || current_user?(@user)
   end 
+  
 end

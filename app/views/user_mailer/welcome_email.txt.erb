@@ -1,6 +1,8 @@
 Welcome to the sample site, <%= @user.name %>
 
-You have successfully created an account. To log in, please follow this link.
-If you believe you receive this message in error, please follow this link to solve the problem. 
+   Your user name is <%= @user.username %>	
+   Here is the confirmation code to access your page. Please follow the link below and enter the code to begin.
+   Your confirmation code is: <%= @code %>. Please beware that this code will expire in one week. If you do not enter the code in that time, please go to the sign up page, and sign up again.
+   Link: <%= link_to "sample_app", user_email_path %> 
 
 Thanks! And have fun!

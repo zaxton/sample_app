@@ -1,6 +1,6 @@
-<%= simple_form_for @micropost do |f| %>
-   <div class = "filed">
-   		<%= f.input :content, :placeholder => "What's on your mind?", :label => false, :required => false %>
+<%= form_for @micropost do |f| %>
+   <div class = "field">
+		<%= f.text_area :content %>
    </div>
    <div class = "actions">
    		<%= f.submit "Post", :class => 'button' %>
