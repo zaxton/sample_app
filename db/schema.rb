@@ -10,10 +10,10 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110711061314) do
+ActiveRecord::Schema.define(:version => 20110713065400) do
 
   create_table "blogs", :force => true do |t|
-    t.string   "content"
+    t.text     "content",    :limit => 255
     t.integer  "user_id"
     t.string   "title"
     t.datetime "created_at"
@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(:version => 20110711061314) do
     t.integer  "recip_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "message_tokens"
   end
 
   create_table "microposts", :force => true do |t|
@@ -50,7 +51,6 @@ ActiveRecord::Schema.define(:version => 20110711061314) do
   end
 
   create_table "secretecodes", :force => true do |t|
-    t.integer  "user_id",    :null => false
     t.string   "text"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -82,6 +82,7 @@ ActiveRecord::Schema.define(:version => 20110711061314) do
     t.string   "work_info"
     t.string   "username"
     t.datetime "birthday"
+    t.string   "code"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

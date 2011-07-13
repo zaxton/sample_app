@@ -48,8 +48,8 @@
 
 			</td>
 						<td class = "sidebar round">
-						<strong>Name</strong> <%= link_to "#{@user.name}", user_path(@user) %><br />
-						<strong>Microposts</strong> <%= @user.microposts.count %><br \>
+						<strong>Name</strong> <%= link_to "#{current_user.name}", user_path(@user) %><br />
+						<strong>Microposts</strong> <%= current_user.microposts.count %><br \>
 						<strong>Blogs</strong> <%= Blog.count %><br \>
 						<%= render 'shared/stats' %>
 					</td>

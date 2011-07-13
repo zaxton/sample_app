@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   end
   
   def show
-    @user = User.find(params[:id])
+    @user = User.find_by_username(params[:id])
     @microposts = @user.microposts.last
     @blog = @user.blog.first
     @title = @user.name
@@ -26,7 +26,7 @@ class UsersController < ApplicationController
     @user = User.new(params[:user])
     if @user.save 
       # Handle a successful save
-      @user.secretcodes.build(:text => secure_code)
+      @user.code = secure_code
       UserMailer.welcome_email(@user).deliver
       flash[:success] = "A verification email has been sent. Please check email provided to continue"
       redirect_to 'home'
@@ -79,7 +79,6 @@ class UsersController < ApplicationController
   
   def user_email
        @title = "Confirm Email"
-       @code = User.secrectcodes.find(params[:id])
   end
   
   

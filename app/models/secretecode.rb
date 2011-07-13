@@ -1,10 +1,9 @@
 # == Schema Information
-# Schema version: 20110711061314
+# Schema version: 20110713064945
 #
 # Table name: secretecodes
 #
-#  id         :integer         not null, primary key
-#  user_id    :integer         not null
+#  id         :integer         primary key
 #  text       :string(255)
 #  created_at :datetime
 #  updated_at :datetime

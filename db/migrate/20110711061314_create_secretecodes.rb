@@ -1,7 +1,7 @@
 class CreateSecretecodes < ActiveRecord::Migration
   def self.up
     create_table :secretecodes do |t|
-      t.integer :user_id, :null => false
+      t.integer :user_id
       t.string :text
 
       t.timestamps

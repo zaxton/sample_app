@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110710163255
+# Schema version: 20110712161640
 #
 # Table name: users
 #
@@ -18,6 +18,7 @@
 #  work_info           :string(255)
 #  username            :string(255)
 #  birthday            :datetime
+#  code                :string(255)
 #
 
 module Physical

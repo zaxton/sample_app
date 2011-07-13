@@ -10,8 +10,10 @@ before_filter :authenticate
 
         def create 
             @micropost = current_user.messages.build(params[:message])
-            search_users
-              if !@micropost.content.empty? 
+             if !@micropost.content.empty?
+                @user = User.where("name like ?", "%#{params[:q]}%") 
+                @micropost.tokens = @user.map(&:id).to_json.to_s
+                @micropost.recip_id = eval(@micropost.tokens).last
                 @micropost.save
                 flash[:success] = "Sent"
                 redirect_to root_path
@@ -32,7 +34,7 @@ before_filter :authenticate
                  format.json { render :json => @user.map(&:attributes)}
                 end
             end
-            
+                
             private
             
             def correct_following

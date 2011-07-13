@@ -1,5 +1,5 @@
 # == Schema Information
-# Schema version: 20110706013526
+# Schema version: 20110712161640
 #
 # Table name: users
 #
@@ -18,6 +18,7 @@
 #  work_info           :string(255)
 #  username            :string(255)
 #  birthday            :datetime
+#  code                :string(255)
 #
 
 class User < ActiveRecord::Base 
@@ -64,7 +65,7 @@ include AASM
   end
   
   def active
-      
+      active_user? 
   end
   
   # Return true if the user's password matches the submitted password
@@ -107,10 +108,19 @@ include AASM
     end
   end
   
+  def to_param
+      "#{username}"
+  end
+  
+  def active_user?
+      User.where("user.code = secrectecode.text")
+  end
+      
+  
   private
   
   def secure_code
-       a = ('a'..'z').to_a + ('A'..'Z').to_a + (0..9).to_a
+       a = ('a'..'z').to_a + ('A'..'Z').to_a + (0..9).to_a + ("!"..")").to_a
        a.shuffle[0..6].join
    end
   

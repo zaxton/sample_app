@@ -13,15 +13,19 @@ SampleApp::Application.routes.draw do
   resources :blog
   resources :messages
   
-  match '/contact', :to => 'pages#contact'
+  controller :pages do
+  match '/contact' => :contact
   
-  match '/about', :to => 'pages#about'
+  match '/about' => :about
   
-  match '/help', :to => 'pages#help'
+  match '/help' => :help
+  end
   
-  match '/user_email', :to => 'pages#user_email'
+  controller :users do
+  get '/user_email' => :user_email
   
-  match '/signup', :to => 'users#new'
+  match '/signup' => :new
+  end
   
   match '/signin', :to => 'sessions#new'
   

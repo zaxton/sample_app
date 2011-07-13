@@ -1,10 +1,10 @@
 # == Schema Information
-# Schema version: 20110626014605
+# Schema version: 20110713064945
 #
 # Table name: blogs
 #
 #  id         :integer         not null, primary key
-#  content    :string(255)
+#  content    :text(255)
 #  user_id    :integer
 #  title      :string(255)
 #  created_at :datetime
