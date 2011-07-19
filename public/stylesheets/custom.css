@@ -368,3 +368,9 @@ html ul.tabs li.active, html ul.tabs li.active a:hover  { /*--Makes sure that th
 	padding: 20px;
 	font-size: 1.2em;
 }
+
+ul.sign_in li.form_field{
+	height: 5px;
+	margin-bottom: 0;
+	list-style: none;
+}

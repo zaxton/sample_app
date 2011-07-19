@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   end
   
   def show
-    @user = User.find_by_username(params[:id])
+    @user = User.find(params[:id])
     @microposts = @user.microposts.last
     @blog = @user.blog.first
     @title = @user.name
@@ -24,12 +24,12 @@ class UsersController < ApplicationController
   
   def create
     @user = User.new(params[:user])
+    @user.gen_code = secure_code
     if @user.save 
       # Handle a successful save
-      @user.code = secure_code
-      UserMailer.welcome_email(@user).deliver
+      #UserMailer.welcome_email(@user).deliver
       flash[:success] = "A verification email has been sent. Please check email provided to continue"
-      redirect_to 'home'
+      redirect_to 'pages/home'
     else
       @title = "Sign Up"
       @user.password = nil
@@ -77,12 +77,12 @@ class UsersController < ApplicationController
       render 'show_follow'
   end
   
-  def user_email
-       @title = "Confirm Email"
-  end
-  
-  
   private
+  
+  def secure_code
+    a = ('a'..'z').to_a + ('A'..'Z').to_a + (0..9).to_a + ("!"..")").to_a
+    a.shuffle[0..6].join
+  end
   
   def correct_user
     @user = User.find(params[:id])

@@ -1,9 +1,9 @@
 # == Schema Information
-# Schema version: 20110712161640
+# Schema version: 20110717171053
 #
 # Table name: users
 #
-#  id                  :integer         not null, primary key
+#  id                  :integer         primary key
 #  name                :string(255)
 #  email               :string(255)
 #  created_at          :datetime
@@ -18,7 +18,8 @@
 #  work_info           :string(255)
 #  username            :string(255)
 #  birthday            :datetime
-#  code                :string(255)
+#  gen_code            :string(255)
+#  activated           :boolean
 #
 
 module Physical

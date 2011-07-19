@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110713065400) do
+ActiveRecord::Schema.define(:version => 20110717171053) do
 
   create_table "blogs", :force => true do |t|
     t.text     "content",    :limit => 255
@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(:version => 20110713065400) do
     t.integer  "recip_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "message_tokens"
+    t.text     "tokens"
   end
 
   create_table "microposts", :force => true do |t|
@@ -50,11 +50,14 @@ ActiveRecord::Schema.define(:version => 20110713065400) do
     t.boolean  "friendship"
   end
 
-  create_table "secretecodes", :force => true do |t|
-    t.string   "text"
+  create_table "secretcodes", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "user_code"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "secretcodes", ["user_id"], :name => "user_id", :unique => true
 
   create_table "sessions", :force => true do |t|
     t.string   "session_id", :null => false
@@ -74,7 +77,7 @@ ActiveRecord::Schema.define(:version => 20110713065400) do
     t.datetime "updated_at"
     t.string   "encrypted_password"
     t.string   "salt"
-    t.boolean  "admin",               :default => false
+    t.boolean  "admin"
     t.string   "goal"
     t.string   "relationship_status"
     t.string   "about_me"
@@ -82,9 +85,8 @@ ActiveRecord::Schema.define(:version => 20110713065400) do
     t.string   "work_info"
     t.string   "username"
     t.datetime "birthday"
-    t.string   "code"
+    t.string   "gen_code"
+    t.boolean  "activated"
   end
-
-  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
 
 end

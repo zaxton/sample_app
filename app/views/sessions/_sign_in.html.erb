@@ -1,0 +1,8 @@
+<% simple_form_for(:session, :url => sessions_path ) do |f| %>
+<li class = "field_forms">
+	<%= f.text_field :email, :placeholder => "Email" %>  <%= f.password_field :password, :placeholder => "Password" %>
+</li>
+<li class = "actions">
+	 <%= f.submit "Sign In", :class => 'button'%>
+</li>
+	<% end %>

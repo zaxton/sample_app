@@ -1,8 +1,10 @@
-Welcome to the sample site, <%= @user.name %>
+Welcome to the sample app, <%= @user.name %>!
 
-   Your user name is <%= @user.username %>	
-   Here is the confirmation code to access your page. Please follow the link below and enter the code to begin.
-   Your confirmation code is: <%= @code %>. Please beware that this code will expire in one week. If you do not enter the code in that time, please go to the sign up page, and sign up again.
-   Link: <%= link_to "sample_app", user_email_url %> 
+    Your user name is <%= @user.username %>	
 
-Thanks! And have fun!
+    This email contains the confirmation code to access your profile.
+	Your confirmation code is: <%= @user.gen_code %>. Click on the link to navigate to the sign in page. Once there, sign in and enter the code. Then, you're done! Please beware that this code will expire in one week. If you do not enter the code in that time, please go to the sign up page, and sign up again.
+	Link: <%= link_to "sample_app", signin_path %>
+
+	
+ Thanks! And have fun!

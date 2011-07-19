@@ -1,8 +1,27 @@
-<h1>Sign Up!</h1>
+<div class="Major_field">
+
+<h1>Sign Up! |</h1><p id ="free">It's free!</p>
 
 <%= simple_form_for(@user) do |f| %>
-<%= render 'fields', :f => f %>
-<div class= "actions">
-	<%= f.button :submit, "Sign Up!" %>
-</div>
+<%= render 'shared/error_messages', :object => f.object %>
+
+    <%= f.input :username, :placeholder => "Username", :label => false %>
+
+	<%= f.input :name, :placeholder => "Name", :label => false %>
+
+	<%= f.input :email, :placeholder => "Email", :label => false %>
+	
+	<%= f.input :birthday, :label => false, :as => :date, :start_year => Date.today.year,
+	                              :end_year => Date.today.year - 50, 
+	                              :order => [:month, :day, :year] %>
+
+    <%= f.input :password, :placeholder => "Password", :label => false %>
+
+	<%= f.input :password_confirmation, :required => true, :placeholder => "Confirmation", :label => false %>
+	
+	<%= f.hidden_field :gen_code %>
+
+	<%= f.button :submit, "Sign Up!" , :class => "button big"%>
+
 <% end %>
+</div>

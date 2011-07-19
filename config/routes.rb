@@ -7,6 +7,7 @@ SampleApp::Application.routes.draw do
           get :following, :followers
       end
   end
+  resources :secretcodes
   resources :sessions, :only => [:new, :create, :destroy]
   resources :microposts, :only => [:create, :destroy]
   resource :relationships, :only => [:create, :destroy]
@@ -19,20 +20,23 @@ SampleApp::Application.routes.draw do
   match '/about' => :about
   
   match '/help' => :help
+  
+  root :to => :home
   end
   
   controller :users do
-  get '/user_email' => :user_email
   
   match '/signup' => :new
   end
   
-  match '/signin', :to => 'sessions#new'
+  controller :sessions do
   
-  match '/signout', :to => 'sessions#destroy'
+  match '/signin' => :new
   
-  root :to => 'pages#home'
-
+  match '/signout' => :destroy
+  end
+  
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

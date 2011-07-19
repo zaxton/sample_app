@@ -1,9 +1,9 @@
 # == Schema Information
-# Schema version: 20110712161640
+# Schema version: 20110717171053
 #
 # Table name: users
 #
-#  id                  :integer         not null, primary key
+#  id                  :integer         primary key
 #  name                :string(255)
 #  email               :string(255)
 #  created_at          :datetime
@@ -18,14 +18,14 @@
 #  work_info           :string(255)
 #  username            :string(255)
 #  birthday            :datetime
-#  code                :string(255)
+#  gen_code            :string(255)
+#  activated           :boolean
 #
 
 class User < ActiveRecord::Base 
-include AASM
   attr_accessor :password
   attr_accessible :username, :name, :email, :birthday, :password, :password_confirmation, :goal, 
-                  :relationship_status, :about_me, :quotes, :work_info
+                  :relationship_status, :about_me, :quotes, :work_info, :gen_code
   has_many :microposts, :dependent => :destroy
   has_many :blog, :dependent => :destroy
   has_many :relationships, :foreign_key => "follower_id", :dependent => :destroy 
@@ -34,15 +34,16 @@ include AASM
   has_many :following, :through => :relationships, :source => :followed
   has_many :followers, :through => :reverse_relationships, :source => :follower
   has_many :messages, :dependent => :destroy
-  has_many :secretcode
+  has_many :secretcodes
   
   email_regex = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   
   validates :username, :presence => true,
                        :uniqueness => true
-  
+                      
   validates :name, :presence => true, 
                    :length => { :maximum => 36 }
+                  
   validates :email, :presence => true,
                     :format => { :with => email_regex },
                     :uniqueness => { :case_sensitive => false }
@@ -52,21 +53,9 @@ include AASM
   validates :password, :presence => true,
                        :confirmation => true,
                        :length => { :within => 6..40 }
-  
+                       
   before_save :encrypt_password
   
-  aasm_column :state
-  aasm_initial_state :unactive
-  aasm_state :unactive
-  aasm_state :activate, :enter => :active
-  
-  aasm_event :activate do
-      transitions :to => :active, :from => [:unactive]
-  end
-  
-  def active
-      active_user? 
-  end
   
   # Return true if the user's password matches the submitted password
   def has_password?(submitted_password)
@@ -108,14 +97,7 @@ include AASM
     end
   end
   
-  def to_param
-      "#{username}"
-  end
   
-  def active_user?
-      User.where("user.code = secrectecode.text")
-  end
-      
   
   private
   

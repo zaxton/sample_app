@@ -1,6 +1,6 @@
 <h1>Welcome!</h1> 
 <p>You are almost done with the sign in process! There is just one more step to go and then you're done! Please enter the confirmation code from your verification email we sent you in the text box below. Then, click submit. That's it, you're done!</p>
-<%= form_for(@user, :method => :put) do |f| %>
+<%= form_for(@code) do |f| %>
 <div class = "field">
 	<%= f.text_field :user_code %>
 </div>
